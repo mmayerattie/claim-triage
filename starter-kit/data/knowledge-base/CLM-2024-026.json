@@ -1,0 +1,18 @@
+{
+  "adjuster_notes": "Police report #2024-SPD-06732 documents neighborhood-wide vandalism incident. Damage consistent with blunt force impact. Mailbox post and box require full replacement. Porch light fixture replacement and minor electrical work needed for rewiring. Claim is below the standard deductible but policyholder has a zero-deductible endorsement for vandalism. Approved for full repair costs.",
+  "affected_areas": [
+    "front_porch",
+    "mailbox"
+  ],
+  "case_reference": "REF-0FECE16125D75EDE1F98",
+  "claim_id": "CLM-2024-026",
+  "damage_type": "vandalism",
+  "date_filed": "2024-05-05",
+  "date_resolved": "2024-05-28",
+  "description": "The homeowner discovered their curbside mailbox had been knocked off its post and the porch light fixture smashed overnight. The brick mailbox column sustained a large crack and the metal mailbox was dented beyond repair. The porch light's glass shade and mounting bracket were shattered, leaving exposed wiring. Several homes on the street experienced similar vandalism, and a police report was filed for the neighborhood.",
+  "fraud_indicators": [],
+  "policy_type": "standard_homeowner",
+  "repair_cost_actual": 600,
+  "resolution": "covered_full",
+  "severity": "minor"
+}

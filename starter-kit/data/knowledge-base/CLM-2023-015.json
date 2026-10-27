@@ -1,0 +1,19 @@
+{
+  "adjuster_notes": "Inspected on 2023-06-17. Corroded brass compression fitting confirmed as the failure point under the bathroom sink. Pipe fitting shows age-related deterioration consistent with the property's 25-year-old plumbing. Water damage to the second-floor bathroom flooring, vanity, and baseboards, plus first-floor ceiling drywall in the bedroom closet area and hallway. No mold detected at time of inspection but preventive treatment recommended. Landlord policy covers water damage from sudden plumbing failures. Full coverage approved. Recommended property owner consider proactive plumbing inspection of remaining original fittings.",
+  "affected_areas": [
+    "bathroom",
+    "bedroom",
+    "hallway"
+  ],
+  "case_reference": "REF-1A4BBA27E0971DF1A6E2",
+  "claim_id": "CLM-2023-015",
+  "damage_type": "water_damage",
+  "date_filed": "2023-06-14",
+  "date_resolved": "2023-07-19",
+  "description": "A corroded pipe fitting beneath the second-floor bathroom sink of the rental property failed, leaking water continuously for approximately 48 hours before the tenant noticed water staining on the first-floor ceiling below. The bathroom floor, vanity cabinet, and surrounding baseboards sustained water damage, and water migrated through the floor into the bedroom closet and hallway ceiling on the first floor. The tenant's personal property was not affected, but the structural and cosmetic damage to the property was significant.",
+  "fraud_indicators": [],
+  "policy_type": "landlord",
+  "repair_cost_actual": 4800,
+  "resolution": "covered_full",
+  "severity": "moderate"
+}

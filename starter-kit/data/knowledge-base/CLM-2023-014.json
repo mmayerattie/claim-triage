@@ -1,0 +1,18 @@
+{
+  "adjuster_notes": "Inspected on 2023-06-02 with independent structural engineer. Foundation cracking confirmed along the north basement wall with maximum crack width of 3/8 inch. Settlement measurement confirms 1.5-inch differential. Soil report indicates clay-heavy soil with poor drainage contributing to the issue. Premium homeowner policy covers sudden foundation damage but classifies gradual settlement as a maintenance issue. Approved partial coverage for emergency stabilization and crack repair ($9,500 of estimated $15,200 total remediation cost). Long-term drainage correction classified as homeowner maintenance responsibility per policy Section 7.3(a).",
+  "affected_areas": [
+    "foundation",
+    "basement"
+  ],
+  "case_reference": "REF-FD0F1A2A49C9EA811AF8",
+  "claim_id": "CLM-2023-014",
+  "damage_type": "other",
+  "date_filed": "2023-05-30",
+  "date_resolved": "2023-07-11",
+  "description": "The policyholder noticed widening cracks in the basement foundation walls and uneven settling of the first floor over a period of several months. A structural engineer's inspection revealed that shifting soil conditions and inadequate drainage around the foundation had caused differential settlement of approximately 1.5 inches on the north side. The foundation cracks required professional epoxy injection and exterior waterproofing, and the affected basement wall section needed reinforcement with carbon fiber strapping.",
+  "fraud_indicators": [],
+  "policy_type": "premium_homeowner",
+  "repair_cost_actual": 9500,
+  "resolution": "covered_partial",
+  "severity": "moderate"
+}

@@ -1,0 +1,21 @@
+{
+  "adjuster_notes": "Inspected on 2023-03-25 with fire marshal present. Origin and cause investigation confirmed electrical fault at a junction box in the southeast attic corner. Wiring in the attic predates current electrical code and shows evidence of overheating at multiple connection points. Fire department response time was 11 minutes; fire had already reached second-alarm status upon arrival. Structure is a total loss. Premium homeowner policy includes full replacement cost coverage up to $350,000. Temporary living expenses authorized for up to 12 months. Full coverage approved.",
+  "affected_areas": [
+    "attic",
+    "second_floor",
+    "first_floor",
+    "roof",
+    "garage"
+  ],
+  "case_reference": "REF-21D926AF1BA7C324B0DE",
+  "claim_id": "CLM-2023-007",
+  "damage_type": "fire_damage",
+  "date_filed": "2023-03-22",
+  "date_resolved": "2023-05-17",
+  "description": "An electrical fire originated in the attic from a faulty junction box in the home's aging wiring system. The fire spread rapidly through the attic insulation and roof structure before burning downward into the second floor bedrooms. By the time the fire department arrived, the entire upper level and roof were fully engulfed. The first floor sustained extensive smoke, water, and heat damage, and the attached garage roof partially collapsed. The home was declared a total structural loss requiring complete demolition and rebuild.",
+  "fraud_indicators": [],
+  "policy_type": "premium_homeowner",
+  "repair_cost_actual": 180000,
+  "resolution": "covered_full",
+  "severity": "catastrophic"
+}

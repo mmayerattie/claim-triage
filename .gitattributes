@@ -1,0 +1,3 @@
+# Preserve fixture bytes and manifest hashes across Windows/Linux checkouts.
+*.pdf binary
+*.png binary

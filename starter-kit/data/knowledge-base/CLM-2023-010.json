@@ -1,0 +1,19 @@
+{
+  "adjuster_notes": "Inspected on 2023-01-25. Confirmed frozen pipe burst at a copper supply line in an uninsulated exterior basement wall section. Temperature records confirm seven consecutive days below 10 degrees Fahrenheit prior to the incident. Water damage extensive throughout the finished basement. Moisture readings critically elevated in all affected materials. Mold prevention protocol initiated. Drywall, carpet, and electrical work all require replacement. Premium homeowner policy provides full coverage for frozen pipe damage including personal property loss. Full coverage approved.",
+  "affected_areas": [
+    "basement",
+    "utility_room",
+    "storage_room"
+  ],
+  "case_reference": "REF-CECECA1748EC6D8868B9",
+  "claim_id": "CLM-2023-010",
+  "damage_type": "water_damage",
+  "date_filed": "2023-01-22",
+  "date_resolved": "2023-03-05",
+  "description": "An extended period of sub-zero temperatures caused a copper supply pipe running through an uninsulated section of the basement wall to freeze and rupture. The pipe burst released a significant volume of water into the finished basement, flooding the utility room and adjacent storage room to a depth of approximately three inches. The finished basement, including drywall, carpet, electrical outlets, and stored personal property, sustained severe water damage requiring extensive remediation and reconstruction.",
+  "fraud_indicators": [],
+  "policy_type": "premium_homeowner",
+  "repair_cost_actual": 18000,
+  "resolution": "covered_full",
+  "severity": "severe"
+}

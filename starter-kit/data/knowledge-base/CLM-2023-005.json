@@ -1,0 +1,19 @@
+{
+  "adjuster_notes": "Inspected on 2023-03-07. Police report #2023-MPD-04471 filed and obtained. Door frame shows clear evidence of forced entry with boot-mark impression near the lock mechanism. Interior disturbance consistent with a burglary in progress. Policyholder provided purchase receipts for stolen electronics. Replacement cost for door, frame, hardware, display cabinet, and stolen property within policy limits. Full coverage approved.",
+  "affected_areas": [
+    "front_entrance",
+    "living_room",
+    "home_office"
+  ],
+  "case_reference": "REF-B7E44DCBCD35082EB90D",
+  "claim_id": "CLM-2023-005",
+  "damage_type": "break_in",
+  "date_filed": "2023-03-05",
+  "date_resolved": "2023-04-09",
+  "description": "Policyholder returned from a weekend trip to discover the front door had been forcibly kicked in, splintering the door frame and damaging the deadbolt assembly. The intruder ransacked the living room and home office, stealing a laptop computer, a tablet, and a small safe containing personal documents. Furniture in both rooms was overturned and a glass display cabinet was shattered during the break-in.",
+  "fraud_indicators": [],
+  "policy_type": "standard_homeowner",
+  "repair_cost_actual": 3200,
+  "resolution": "covered_full",
+  "severity": "moderate"
+}

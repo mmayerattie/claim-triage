@@ -1,0 +1,22 @@
+{
+  "adjuster_notes": "Investigation ongoing. Initial contractor estimates appear significantly above market rate for comparable mold remediation scope. Homeowner purchased property 4 years ago and home inspection from that time notes 'minor foundation seepage.' Delayed reporting is a concern as moisture staining suggests the issue has been present for 12-18 months minimum. Independent environmental assessment and competitive remediation bids have been ordered. Claim remains open pending SIU review of timeline and estimate discrepancies.",
+  "affected_areas": [
+    "basement",
+    "bathroom",
+    "crawl_space"
+  ],
+  "case_reference": "REF-8BB88676861471386463",
+  "claim_id": "CLM-2024-029",
+  "damage_type": "other",
+  "date_filed": "2024-06-25",
+  "date_resolved": null,
+  "description": "The homeowner reported extensive mold growth in the basement, first-floor bathroom, and crawl space, attributing it to chronic moisture intrusion from a foundation crack that had been present for an unknown period. The mold was discovered during a renovation project when drywall was removed, revealing black mold colonies across structural framing and subfloor. The homeowner claims the moisture issue was not previously visible and filed for full remediation and structural repair costs.",
+  "fraud_indicators": [
+    "inflated_estimates",
+    "delayed_reporting"
+  ],
+  "policy_type": "premium_homeowner",
+  "repair_cost_actual": 25000,
+  "resolution": "pending_investigation",
+  "severity": "severe"
+}

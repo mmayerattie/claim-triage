@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1090" width="1600" height="1090" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title>Triage agent: the ReAct loop, step by step</title>
+  <defs>
+    <marker id="a-grey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5c6577"/></marker>
+    <marker id="a-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b4fbb"/></marker>
+    <marker id="a-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2456c7"/></marker>
+    <marker id="a-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b3261e"/></marker>
+    <style>
+      .title { font-size: 26px; font-weight: 700; fill: #1d2330; }
+      .tagline { font-size: 15px; fill: #5c6577; }
+      .lane { font-size: 15px; font-weight: 700; }
+      .turn { font-size: 14px; font-weight: 700; fill: #1d2330; }
+      .t { font-size: 12.5px; fill: #1d2330; }
+      .code { font-size: 12.5px; fill: #1d2330; font-family: ui-monospace, Menlo, Consolas, monospace; }
+      .m { font-size: 12px; fill: #5c6577; }
+      .tr-r { font-size: 12.5px; font-weight: 700; fill: #6b4fbb; }
+      .tr-a { font-size: 12.5px; font-weight: 700; fill: #2456c7; }
+      .tr-o { font-size: 12.5px; font-weight: 700; fill: #1d7a46; }
+      .life { stroke: #c3c9d4; stroke-width: 1.5; stroke-dasharray: 6 5; }
+      .act { stroke: #6b4fbb; stroke-width: 2.2; fill: none; }
+      .obs { stroke: #2456c7; stroke-width: 2.2; fill: none; }
+      .tool { stroke: #5c6577; stroke-width: 1.8; fill: none; }
+      .err { stroke: #b3261e; stroke-width: 2.4; fill: none; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1090" fill="#ffffff"/>
+
+  <text x="40" y="50" class="title">Triage agent — the ReAct loop, step by step</text>
+  <text x="40" y="76" class="tagline">A real run of the current system: IMG_001 + description, standard homeowner (claim CLM-55EB75D41AB8). The model only asks; our code runs the tools.</text>
+
+  <!-- Lane headers -->
+  <rect x="200" y="100" width="260" height="44" rx="8" fill="#f1edfb" stroke="#6b4fbb" stroke-width="2"/>
+  <text x="330" y="128" class="lane" fill="#4b3196" text-anchor="middle">GPT-5.5 · decides</text>
+  <rect x="650" y="100" width="300" height="44" rx="8" fill="#eaf0fc" stroke="#2456c7" stroke-width="2"/>
+  <text x="800" y="128" class="lane" fill="#1b4299" text-anchor="middle">Our code · tool executor</text>
+  <rect x="1060" y="100" width="240" height="44" rx="8" fill="#f2f4f8" stroke="#8a93a6" stroke-width="1.5"/>
+  <text x="1180" y="128" class="lane" fill="#3d4555" text-anchor="middle">Tools &amp; data</text>
+  <text x="1370" y="128" class="lane" fill="#1d2330">Trace (UI panel)</text>
+
+  <!-- Turn bands -->
+  <rect x="30" y="160" width="1310" height="56" rx="8" fill="#f6f7f9"/>
+  <rect x="30" y="226" width="1310" height="150" rx="8" fill="#f8f7fd"/>
+  <rect x="30" y="386" width="1310" height="140" rx="8" fill="#f8f7fd"/>
+  <rect x="30" y="536" width="1310" height="200" rx="8" fill="#f8f7fd"/>
+
+  <text x="44" y="194" class="turn">Start</text>
+  <text x="44" y="252" class="turn">Turn 1</text><text x="44" y="270" class="m">search</text>
+  <text x="44" y="412" class="turn">Turn 2</text><text x="44" y="430" class="m">estimate</text>
+  <text x="44" y="562" class="turn">Turn 3</text><text x="44" y="580" class="m">coverage</text><text x="44" y="596" class="m">+ finish</text>
+
+  <!-- Lifelines -->
+  <line x1="330" y1="146" x2="330" y2="736" class="life"/>
+  <line x1="800" y1="146" x2="800" y2="752" class="life"/>
+  <line x1="1180" y1="146" x2="1180" y2="736" class="life"/>
+
+  <!-- Start -->
+  <path d="M796,192 H336" class="tool" marker-end="url(#a-grey)"/>
+  <text x="565" y="184" class="t" text-anchor="middle">system prompt + 4 tool schemas + evidence (photo, text, policy)</text>
+  <text x="565" y="208" class="m" text-anchor="middle">every later turn resends this plus all previous calls and results</text>
+
+  <!-- Turn 1 -->
+  <path d="M334,258 H796" class="act" marker-end="url(#a-purple)"/>
+  <text x="565" y="250" class="code" text-anchor="middle">search_past_claims(query: "Burst pipe … kitchen sink …")</text>
+  <text x="565" y="274" class="m" text-anchor="middle">purpose: "Find similar prior claims for a kitchen sink pipe leak"</text>
+  <path d="M804,300 H1176" class="tool" marker-end="url(#a-grey)"/>
+  <text x="990" y="292" class="t" text-anchor="middle">bge-small embeds query → Qdrant cosine top 3</text>
+  <path d="M1176,330 H804" class="tool" marker-end="url(#a-grey)"/>
+  <text x="990" y="322" class="t" text-anchor="middle">top 3: CLM-2023-001 (0.82) · 2023-015 · 2024-025</text>
+  <path d="M796,360 H334" class="obs" marker-end="url(#a-blue)"/>
+  <text x="565" y="352" class="t" text-anchor="middle">3 claims, all "strong", appended to the conversation (observation)</text>
+  <text x="1370" y="256" class="tr-r">1 · reason</text><text x="1452" y="256" class="m">purpose</text>
+  <text x="1370" y="280" class="tr-a">2 · act</text><text x="1452" y="280" class="m">search + query</text>
+  <text x="1370" y="360" class="tr-o">3 · observe</text><text x="1462" y="360" class="m">3 claims</text>
+
+  <!-- Turn 2 -->
+  <path d="M334,418 H796" class="act" marker-end="url(#a-purple)"/>
+  <text x="565" y="410" class="code" text-anchor="middle">estimate_repair_cost(moderate, ["kitchen"])</text>
+  <text x="565" y="434" class="m" text-anchor="middle">water_damage · purpose: "Estimate repair cost for kitchen water damage"</text>
+  <path d="M804,458 H1176" class="tool" marker-end="url(#a-grey)"/>
+  <text x="990" y="450" class="t" text-anchor="middle">areas normalised → cost-estimator.json</text>
+  <path d="M1176,486 H804" class="tool" marker-end="url(#a-grey)"/>
+  <text x="990" y="478" class="t" text-anchor="middle">2,000–8,000 per area × 1 area</text>
+  <path d="M796,512 H334" class="obs" marker-end="url(#a-blue)"/>
+  <text x="565" y="504" class="code" text-anchor="middle">{"min": 2000, "max": 8000, "currency": "USD"}</text>
+  <text x="1370" y="416" class="tr-r">4 · reason</text>
+  <text x="1370" y="440" class="tr-a">5 · act</text><text x="1452" y="440" class="m">moderate, kitchen</text>
+  <text x="1370" y="512" class="tr-o">6 · observe</text><text x="1462" y="512" class="m">2,000–8,000</text>
+
+  <!-- Turn 3: two calls in one reply -->
+  <path d="M334,568 H796" class="act" marker-end="url(#a-purple)"/>
+  <text x="565" y="560" class="code" text-anchor="middle">check_coverage(incident_category: "water_damage")</text>
+  <text x="565" y="584" class="code" text-anchor="middle">+ submit_triage(description, urgency, …)</text>
+  <text x="565" y="602" class="m" text-anchor="middle">both requested in the same reply</text>
+  <path d="M804,622 H1176" class="tool" marker-end="url(#a-grey)"/>
+  <text x="990" y="614" class="t" text-anchor="middle">coverage-table.json · policy forced by code</text>
+  <path d="M1176,650 H804" class="tool" marker-end="url(#a-grey)"/>
+  <text x="990" y="642" class="t" text-anchor="middle">listed · deductible 1,500 · max 250,000</text>
+  <rect x="640" y="672" width="320" height="38" rx="19" fill="#e8f5ee" stroke="#1d7a46" stroke-width="1.8"/>
+  <text x="800" y="696" class="t" text-anchor="middle" fill="#155c35">submit: searched ✓ estimated ✓ → loop ends</text>
+  <text x="990" y="696" class="m">(otherwise: "Cannot finish yet")</text>
+  <text x="1370" y="566" class="tr-r">7 · reason</text>
+  <text x="1370" y="590" class="tr-a">8 · act</text><text x="1452" y="590" class="m">coverage</text>
+  <text x="1370" y="650" class="tr-o">9 · observe</text><text x="1462" y="650" class="m">listed</text>
+
+  <!-- Assembly -->
+  <path d="M800,752 V770" class="tool" marker-end="url(#a-grey)"/>
+  <rect x="330" y="774" width="940" height="100" rx="10" fill="#eaf0fc" stroke="#2456c7" stroke-width="2"/>
+  <text x="800" y="800" class="lane" fill="#1b4299" text-anchor="middle">Report assembly · our code</text>
+  <text x="800" y="823" class="t" text-anchor="middle">Copied from the last estimate: water_damage · moderate · ["kitchen"] · 2,000–8,000 USD → the report always matches the trace</text>
+  <text x="800" y="843" class="t" text-anchor="middle">Citations kept only if retrieved: CLM-2023-001, CLM-2024-025 · handling: standard route, high confidence</text>
+  <text x="800" y="862" class="m" text-anchor="middle">then the safety check (passed, no rewrite) · 4 model calls in total (1 intake + 3 triage) · 10.8 s</text>
+
+  <!-- Error path panel -->
+  <rect x="30" y="894" width="1310" height="132" rx="10" fill="#fdf4f3" stroke="#e8b4ae" stroke-width="1.5"/>
+  <text x="50" y="920" class="lane" fill="#8c1d18" style="font-size:14px">If a request is invalid — how the loop corrects itself (current behaviour)</text>
+  <path d="M60,948 H120" class="act" marker-end="url(#a-purple)"/>
+  <text x="130" y="952" class="t">1. The model asks for a tool with a bad request</text>
+  <text x="130" y="970" class="m">e.g. an empty search query, or submit before search + estimate</text>
+  <path d="M520,948 H580" class="err" marker-end="url(#a-red)"/>
+  <text x="590" y="952" class="t">2. Code does not run the tool; it returns the problem as the observation</text>
+  <text x="590" y="970" class="code" fill="#8c1d18">{"error": "Cannot finish yet: call estimate_repair_cost first."}</text>
+  <text x="1090" y="952" class="t">3. Next turn the model re-reads it</text>
+  <text x="1090" y="970" class="t">and sends a corrected request</text>
+  <text x="50" y="1004" class="m">Invalid enum values (e.g. severity "high", an urgency word) are now blocked while generating by strict tool schemas. That error was seen once, in an early run before strict mode;</text>
+  <text x="50" y="1019" class="m">the validation stays as a safety net. Requests that still reach this path: empty search query, submit too early, knowledge base unavailable.</text>
+
+  <!-- Guards panel -->
+  <rect x="1360" y="774" width="210" height="252" rx="10" fill="#ffffff" stroke="#d9dde5" stroke-width="1.5"/>
+  <text x="1376" y="800" class="lane" fill="#1d2330" style="font-size:14px">Loop guards</text>
+  <text x="1376" y="826" class="t">• submit refused until</text>
+  <text x="1388" y="843" class="t">search + estimate</text>
+  <text x="1376" y="868" class="t">• max 6 turns, then</text>
+  <text x="1388" y="885" class="t">submit is forced</text>
+  <text x="1376" y="910" class="t">• bad request → error</text>
+  <text x="1388" y="927" class="t">as observation</text>
+  <text x="1376" y="952" class="t">• strict schemas: only</text>
+  <text x="1388" y="969" class="t">allowed values</text>
+  <text x="1376" y="994" class="t">• model is stateless:</text>
+  <text x="1388" y="1011" class="t">full history resent</text>
+
+  <!-- Legend -->
+  <line x1="40" y1="1060" x2="80" y2="1060" class="act"/><text x="88" y="1064" class="m">act: model asks for a tool</text>
+  <line x1="290" y1="1060" x2="330" y2="1060" class="obs"/><text x="338" y="1064" class="m">observe: result returned to the model</text>
+  <line x1="590" y1="1060" x2="630" y2="1060" class="err"/><text x="638" y="1064" class="m">error returned as the observation</text>
+  <line x1="880" y1="1060" x2="920" y2="1060" class="tool"/><text x="928" y="1064" class="m">code ↔ tools and data</text>
+</svg>

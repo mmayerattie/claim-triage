@@ -1,0 +1,19 @@
+{
+  "adjuster_notes": "Police report #2024-MPD-08837 confirms hit-and-run vandalism. Vehicle was reported stolen and later recovered two miles from the property. Fence requires full replacement across the north boundary. Driveway section needs removal and repour. Irrigation repair and sod replacement included. Landlord policy covers structural and grounds damage.",
+  "affected_areas": [
+    "fence",
+    "driveway",
+    "front_yard"
+  ],
+  "case_reference": "REF-7E2C822554D9FD73B486",
+  "claim_id": "CLM-2024-019",
+  "damage_type": "vandalism",
+  "date_filed": "2024-04-02",
+  "date_resolved": "2024-05-14",
+  "description": "A vehicle was deliberately driven through the property's wooden privacy fence, crossing the front yard and coming to rest against a landscaping retaining wall. The incident destroyed approximately 60 feet of cedar fencing, tore up sod and irrigation lines in the front yard, and cracked a section of the concrete driveway. The driver fled the scene on foot and police were unable to identify the individual. The tenant reported the incident immediately.",
+  "fraud_indicators": [],
+  "policy_type": "landlord",
+  "repair_cost_actual": 8500,
+  "resolution": "covered_full",
+  "severity": "severe"
+}

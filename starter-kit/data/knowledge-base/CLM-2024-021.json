@@ -1,0 +1,18 @@
+{
+  "adjuster_notes": "Claim denied per standard homeowner policy exclusion Section 14(c) for damage caused by pets owned by the insured. Damage is consistent with gradual pet wear rather than a sudden covered event. Informed policyholder of denial and directed them to policy language regarding pet damage exclusions. No appeal filed.",
+  "affected_areas": [
+    "living_room",
+    "hallway"
+  ],
+  "case_reference": "REF-4D06D776F6E24D20EB2D",
+  "claim_id": "CLM-2024-021",
+  "damage_type": "other",
+  "date_filed": "2024-02-28",
+  "date_resolved": "2024-03-20",
+  "description": "The homeowner filed a claim for extensive scratching and gouging damage to hardwood floors in the living room and hallway caused by their two large dogs over a period of several months. Deep claw marks were visible across approximately 300 square feet of oak flooring, and several areas showed urine staining that had penetrated the finish. The homeowner requested coverage for full refinishing and partial board replacement.",
+  "fraud_indicators": [],
+  "policy_type": "standard_homeowner",
+  "repair_cost_actual": 2200,
+  "resolution": "denied",
+  "severity": "minor"
+}

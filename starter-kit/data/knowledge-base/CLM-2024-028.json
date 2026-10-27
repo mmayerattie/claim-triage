@@ -1,0 +1,19 @@
+{
+  "adjuster_notes": "NWS confirmed straight-line wind event with recorded gusts of 72 mph at nearby weather station. Damage pattern consistent with wind-driven debris impact. Siding repair requires removal and replacement of two 4x8 sections. Window replacement for cracked double-pane unit. Deck railing section needs full replacement to match existing style. All repairs approved under standard homeowner wind damage coverage.",
+  "affected_areas": [
+    "siding",
+    "windows",
+    "deck"
+  ],
+  "case_reference": "REF-B2A05EEE110B0021C633",
+  "claim_id": "CLM-2024-028",
+  "damage_type": "storm_damage",
+  "date_filed": "2024-06-12",
+  "date_resolved": "2024-07-18",
+  "description": "A severe windstorm with gusts exceeding 70 mph blew debris into the property, causing significant damage to the east-facing exterior. A large tree branch punctured the vinyl siding in two locations and cracked a double-pane window in the dining room. The rear deck railing was struck by a section of a neighbor's fence that became airborne, snapping three balusters and bending the top rail. Multiple homes in the area sustained similar wind damage.",
+  "fraud_indicators": [],
+  "policy_type": "standard_homeowner",
+  "repair_cost_actual": 7800,
+  "resolution": "covered_full",
+  "severity": "moderate"
+}

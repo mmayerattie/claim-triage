@@ -1,0 +1,18 @@
+{
+  "adjuster_notes": "Hot water heater showed clear corrosion at base consistent with age-related failure. No signs of neglect or deferred maintenance beyond normal wear. Drywall replacement, carpet removal and replacement, and new water heater installation approved. Mold remediation not required per moisture testing.",
+  "affected_areas": [
+    "basement",
+    "utility_room"
+  ],
+  "case_reference": "REF-949346FFF3682BDB0109",
+  "claim_id": "CLM-2024-017",
+  "damage_type": "water_damage",
+  "date_filed": "2024-01-22",
+  "date_resolved": "2024-02-28",
+  "description": "The homeowner's 12-year-old hot water heater ruptured at the base, releasing approximately 50 gallons of water into the finished basement utility room. Water spread across the utility room floor and seeped into the adjacent carpeted basement area. Drywall along the lower 18 inches sustained water damage and mold-prone saturation. The homeowner shut off the water supply within 30 minutes of discovering the leak.",
+  "fraud_indicators": [],
+  "policy_type": "standard_homeowner",
+  "repair_cost_actual": 6200,
+  "resolution": "covered_full",
+  "severity": "moderate"
+}

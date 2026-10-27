@@ -1,0 +1,20 @@
+{
+  "adjuster_notes": "Inspected on 2023-02-06. Fire origin confirmed at the gas range cooktop consistent with a grease fire. Fire department report corroborates policyholder's account. Extensive charring and structural damage to kitchen ceiling joists and wall framing. Smoke damage pervasive on the entire first floor. Contents loss inventory submitted and appears reasonable. Full coverage approved under standard homeowner fire damage provision.",
+  "affected_areas": [
+    "kitchen",
+    "dining_room",
+    "hallway",
+    "living_room"
+  ],
+  "case_reference": "REF-5844A33A92B7CF01D575",
+  "claim_id": "CLM-2023-003",
+  "damage_type": "fire_damage",
+  "date_filed": "2023-02-03",
+  "date_resolved": "2023-03-24",
+  "description": "A grease fire ignited on the stovetop while the policyholder was preparing dinner, rapidly spreading to the overhead cabinetry and exhaust hood. The fire department responded within eight minutes but the fire had already engulfed the kitchen and spread smoke damage throughout the first floor. The kitchen was deemed a total loss requiring full demolition and rebuild, and significant smoke and soot remediation was required in the dining room, hallway, and living room.",
+  "fraud_indicators": [],
+  "policy_type": "standard_homeowner",
+  "repair_cost_actual": 45000,
+  "resolution": "covered_full",
+  "severity": "severe"
+}

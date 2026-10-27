@@ -1,0 +1,19 @@
+{
+  "adjuster_notes": "Fire marshal report identifies lint buildup in dryer exhaust duct as ignition source. Duct had not been professionally cleaned in over three years per tenant statement. Landlord policy covers fire damage to structure regardless of maintenance history. Repairs include laundry room rebuild, flooring replacement, smoke damage remediation in hallway and utility closet, and dryer replacement. Recommended landlord implement annual dryer vent cleaning schedule.",
+  "affected_areas": [
+    "laundry_room",
+    "hallway",
+    "utility_closet"
+  ],
+  "case_reference": "REF-244803E75141F687B7B0",
+  "claim_id": "CLM-2024-027",
+  "damage_type": "fire_damage",
+  "date_filed": "2024-03-08",
+  "date_resolved": "2024-04-26",
+  "description": "A dryer lint fire broke out in the rental property's laundry room when accumulated lint in the exhaust duct ignited during a drying cycle. The tenant smelled smoke and called 911 before evacuating. The fire damaged the dryer, melted the vinyl flooring in the laundry room, and caused smoke damage along the adjacent hallway and utility closet. The fire department contained the blaze within 20 minutes of arrival, preventing spread to the rest of the unit.",
+  "fraud_indicators": [],
+  "policy_type": "landlord",
+  "repair_cost_actual": 15000,
+  "resolution": "covered_full",
+  "severity": "moderate"
+}

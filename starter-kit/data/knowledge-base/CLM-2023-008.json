@@ -1,0 +1,20 @@
+{
+  "adjuster_notes": "Inspected on 2023-04-05. NWS confirmed severe thunderstorm warning with measured wind gusts of 63 mph in the area on 2023-04-01. Oak tree estimated at 70+ years old; root ball fully exposed showing wet soil conditions contributed to the uprooting. Garage is a total loss requiring demolition and rebuild. Two vehicles inside sustained damage but are covered under separate auto policies. Tree removal, garage rebuild, driveway repair, and main dwelling roof repair all covered under standard homeowner storm damage provision. Full coverage approved.",
+  "affected_areas": [
+    "garage",
+    "driveway",
+    "roof",
+    "yard"
+  ],
+  "case_reference": "REF-275B9BDFD7AEC88D101A",
+  "claim_id": "CLM-2023-008",
+  "damage_type": "storm_damage",
+  "date_filed": "2023-04-02",
+  "date_resolved": "2023-05-14",
+  "description": "During a severe thunderstorm with sustained winds exceeding 60 mph, a large mature oak tree on the property was uprooted and fell directly onto the detached two-car garage. The tree crushed the garage roof, collapsing the structure onto the vehicles inside and damaging the concrete driveway upon impact. Additional debris from the tree struck the main dwelling's roof, dislodging several shingles and damaging a gutter section along the north side.",
+  "fraud_indicators": [],
+  "policy_type": "standard_homeowner",
+  "repair_cost_actual": 22000,
+  "resolution": "covered_full",
+  "severity": "severe"
+}

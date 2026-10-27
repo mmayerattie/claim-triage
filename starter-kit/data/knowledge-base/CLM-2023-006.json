@@ -1,0 +1,18 @@
+{
+  "adjuster_notes": "Inspected on 2023-03-15. Confirmed washing machine supply hose failure at the connection point. Damage limited to flooring and baseboards in the laundry area and hallway. Renters insurance policy covers personal property loss from named perils but explicitly excludes structural water damage, which is the landlord's responsibility. Personal property damage from water is excluded under this renters policy per Section 3.1(d). Claim denied. Advised policyholder to contact landlord's insurance for structural repairs.",
+  "affected_areas": [
+    "laundry_area",
+    "hallway"
+  ],
+  "case_reference": "REF-FDEA08EBFD73746AB270",
+  "claim_id": "CLM-2023-006",
+  "damage_type": "water_damage",
+  "date_filed": "2023-03-12",
+  "date_resolved": "2023-04-02",
+  "description": "The policyholder's washing machine supply hose failed during a wash cycle, releasing water across the laundry area floor of the rented apartment. Water seeped into the adjacent hallway, damaging the laminate flooring and saturating the baseboards. The tenant's personal belongings stored on the laundry area floor, including a basket of clothing and a set of shoes, were also water-damaged.",
+  "fraud_indicators": [],
+  "policy_type": "renters",
+  "repair_cost_actual": 900,
+  "resolution": "denied",
+  "severity": "minor"
+}

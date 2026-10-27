@@ -1,0 +1,20 @@
+{
+  "adjuster_notes": "Sump pump failure confirmed by plumber's inspection report. Standard homeowner policy covers interior water damage but sump pump failure requires optional endorsement which was not purchased. Partial coverage approved for structural repairs (drywall, flooring) at $9,800. Personal property and appliance losses of $5,200 denied under sump pump exclusion. Recommended policyholder add sump pump endorsement at renewal.",
+  "affected_areas": [
+    "basement",
+    "family_room",
+    "storage_room",
+    "laundry_room"
+  ],
+  "case_reference": "REF-9714891DEF3E5624DE9E",
+  "claim_id": "CLM-2024-022",
+  "damage_type": "water_damage",
+  "date_filed": "2024-04-18",
+  "date_resolved": "2024-06-05",
+  "description": "During a period of heavy spring rainfall, the homeowner's sump pump failed due to a burned-out motor, resulting in approximately 14 inches of standing water throughout the finished basement. The flooding destroyed carpet, drywall, furniture, stored personal items, and a washer and dryer in the laundry room. The homeowner discovered the flooding approximately 8 hours after the pump failure when they went downstairs in the morning.",
+  "fraud_indicators": [],
+  "policy_type": "standard_homeowner",
+  "repair_cost_actual": 15000,
+  "resolution": "covered_partial",
+  "severity": "severe"
+}

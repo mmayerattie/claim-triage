@@ -1,0 +1,37 @@
+{
+  "_description": "Policy coverage lookup table. Given a policy_type and incident_category, returns coverage details.",
+  "policies": {
+    "basic_homeowner": {
+      "covered_categories": ["fire_damage", "storm_damage", "break_in"],
+      "deductible": 2500,
+      "max_payout": 100000,
+      "notes": "Basic coverage. Does not cover water damage, vandalism, or flood."
+    },
+    "standard_homeowner": {
+      "covered_categories": ["fire_damage", "storm_damage", "break_in", "water_damage", "vandalism"],
+      "deductible": 1500,
+      "max_payout": 250000,
+      "notes": "Standard coverage. Does not cover flood or earthquake without separate rider."
+    },
+    "premium_homeowner": {
+      "covered_categories": ["fire_damage", "storm_damage", "break_in", "water_damage", "vandalism", "other"],
+      "deductible": 1000,
+      "max_payout": 500000,
+      "notes": "Comprehensive coverage. Flood and earthquake require separate rider but have reduced deductible."
+    },
+    "renters": {
+      "covered_categories": ["fire_damage", "storm_damage", "break_in"],
+      "deductible": 500,
+      "max_payout": 30000,
+      "notes": "Covers personal property only, not structural damage. Liability included."
+    },
+    "landlord": {
+      "covered_categories": ["fire_damage", "storm_damage", "break_in", "water_damage", "vandalism"],
+      "deductible": 2000,
+      "max_payout": 300000,
+      "notes": "Covers structural damage and liability. Tenant belongings not covered."
+    }
+  },
+  "excluded_everywhere": ["flood", "earthquake", "nuclear", "war", "intentional_damage"],
+  "usage": "Lookup policy_type → check if incident_category is in covered_categories. Return { covered: bool, deductible, max_payout, notes }."
+}

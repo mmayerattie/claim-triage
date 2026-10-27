@@ -1,0 +1,42 @@
+{
+  "_description": "Repair cost estimation lookup table. Use damage_type + severity to find the base cost range. Multiply by the number of affected areas to get the total estimate.",
+  "cost_matrix": {
+    "water_damage": {
+      "minor": { "min_per_area": 500, "max_per_area": 2000 },
+      "moderate": { "min_per_area": 2000, "max_per_area": 8000 },
+      "severe": { "min_per_area": 8000, "max_per_area": 25000 },
+      "catastrophic": { "min_per_area": 25000, "max_per_area": 75000 }
+    },
+    "fire_damage": {
+      "minor": { "min_per_area": 1000, "max_per_area": 5000 },
+      "moderate": { "min_per_area": 5000, "max_per_area": 20000 },
+      "severe": { "min_per_area": 20000, "max_per_area": 75000 },
+      "catastrophic": { "min_per_area": 75000, "max_per_area": 200000 }
+    },
+    "storm_damage": {
+      "minor": { "min_per_area": 300, "max_per_area": 1500 },
+      "moderate": { "min_per_area": 1500, "max_per_area": 6000 },
+      "severe": { "min_per_area": 6000, "max_per_area": 20000 },
+      "catastrophic": { "min_per_area": 20000, "max_per_area": 60000 }
+    },
+    "break_in": {
+      "minor": { "min_per_area": 200, "max_per_area": 1000 },
+      "moderate": { "min_per_area": 1000, "max_per_area": 4000 },
+      "severe": { "min_per_area": 4000, "max_per_area": 12000 },
+      "catastrophic": { "min_per_area": 12000, "max_per_area": 30000 }
+    },
+    "vandalism": {
+      "minor": { "min_per_area": 100, "max_per_area": 800 },
+      "moderate": { "min_per_area": 800, "max_per_area": 3000 },
+      "severe": { "min_per_area": 3000, "max_per_area": 10000 },
+      "catastrophic": { "min_per_area": 10000, "max_per_area": 25000 }
+    },
+    "other": {
+      "minor": { "min_per_area": 200, "max_per_area": 1500 },
+      "moderate": { "min_per_area": 1500, "max_per_area": 6000 },
+      "severe": { "min_per_area": 6000, "max_per_area": 20000 },
+      "catastrophic": { "min_per_area": 20000, "max_per_area": 50000 }
+    }
+  },
+  "usage": "total_min = min_per_area * max(1, number_of_distinct_affected_areas); total_max = max_per_area * max(1, number_of_distinct_affected_areas). Count rooms or distinct exterior components once; do not double-count room + its wall/floor, generic interior/exterior aliases, or repeated views."
+}

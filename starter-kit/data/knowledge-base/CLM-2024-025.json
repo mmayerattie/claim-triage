@@ -1,0 +1,17 @@
+{
+  "adjuster_notes": "Supply line connection showed wear consistent with normal aging. No evidence of improper installation or neglect. Damage limited to small flooring section and two cabinet kickboards. Premium policy covers appliance-related water damage with no deductible for claims under $2,500. Approved for hardwood floor section repair and cabinet kickboard replacement.",
+  "affected_areas": [
+    "kitchen"
+  ],
+  "case_reference": "REF-884036E4F7F2A5E3E7C4",
+  "claim_id": "CLM-2024-025",
+  "damage_type": "water_damage",
+  "date_filed": "2024-01-10",
+  "date_resolved": "2024-02-14",
+  "description": "A supply line connection to the dishwasher loosened over time and began leaking water onto the kitchen floor during a wash cycle. The homeowner noticed water pooling around the base of the dishwasher and spreading under adjacent cabinetry. Approximately 3 gallons of water leaked before the supply was shut off. The hardwood flooring in a 4-foot radius showed cupping and discoloration, and the kickboard of two lower cabinets absorbed moisture.",
+  "fraud_indicators": [],
+  "policy_type": "premium_homeowner",
+  "repair_cost_actual": 1500,
+  "resolution": "covered_full",
+  "severity": "minor"
+}

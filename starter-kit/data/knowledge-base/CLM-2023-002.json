@@ -1,0 +1,21 @@
+{
+  "adjuster_notes": "Inspected on 2023-02-01. Roof shingles in the affected area show long-term weathering and granule loss inconsistent with sudden damage. Claimant has filed two similar water damage claims in the past 18 months under a previous policy. Timeline of reported damage onset does not align with weather records for the area. Basic homeowner policy explicitly excludes gradual water damage and roof leak coverage. Claim denied per policy exclusion Section 4.2(b). Flagged for further review due to prior claims pattern.",
+  "affected_areas": [
+    "bedroom",
+    "attic"
+  ],
+  "case_reference": "REF-C890E647DFB71B864C73",
+  "claim_id": "CLM-2023-002",
+  "damage_type": "water_damage",
+  "date_filed": "2023-01-28",
+  "date_resolved": "2023-03-11",
+  "description": "Claimant reported water staining on the master bedroom ceiling following a period of heavy rainfall. Upon inspection, a section of the roof above the bedroom was found to have deteriorated shingles allowing water infiltration into the attic space and through the ceiling drywall. The claimant stated the leak appeared suddenly, though evidence suggests gradual wear over an extended period.",
+  "fraud_indicators": [
+    "prior_claims_pattern",
+    "inconsistent_timeline"
+  ],
+  "policy_type": "basic_homeowner",
+  "repair_cost_actual": 1800,
+  "resolution": "denied",
+  "severity": "minor"
+}

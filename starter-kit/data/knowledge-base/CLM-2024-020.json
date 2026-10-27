@@ -1,0 +1,20 @@
+{
+  "adjuster_notes": "Fire marshal report confirms lightning as cause of ignition. Burn pattern in attic consistent with electrical ignition point near chimney chase. Full attic rebuild, roof section replacement, electrical system rewiring for second floor, and smoke damage remediation required. Master bedroom needs full gut and rebuild. Temporary housing approved for 8 weeks. Premium policy provides extended replacement cost.",
+  "affected_areas": [
+    "roof",
+    "attic",
+    "master_bedroom",
+    "electrical_system"
+  ],
+  "case_reference": "REF-C370476EEC52A1D8E7E8",
+  "claim_id": "CLM-2024-020",
+  "damage_type": "fire_damage",
+  "date_filed": "2024-05-20",
+  "date_resolved": "2024-07-12",
+  "description": "A lightning strike during a severe thunderstorm hit the chimney and traveled through the home's electrical system, igniting insulation in the attic. The fire spread across approximately 40% of the attic space before the fire department arrived and contained it. Significant smoke damage occurred throughout the second floor, particularly the master bedroom directly below the attic. The home's entire electrical panel and much of the second-floor wiring was destroyed by the surge.",
+  "fraud_indicators": [],
+  "policy_type": "premium_homeowner",
+  "repair_cost_actual": 65000,
+  "resolution": "covered_full",
+  "severity": "severe"
+}

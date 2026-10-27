@@ -1,0 +1,196 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 990" width="1600" height="990" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title>Home-damage claim triage: system architecture</title>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5c6577"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6b4fbb"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2456c7"/>
+    </marker>
+    <style>
+      .title { font-size: 26px; font-weight: 700; fill: #1d2330; }
+      .tagline { font-size: 16px; fill: #5c6577; }
+      .section { font-size: 12px; font-weight: 700; letter-spacing: .08em; fill: #5c6577; }
+      .h { font-size: 16px; font-weight: 700; fill: #1d2330; }
+      .h-model { font-size: 16px; font-weight: 700; fill: #4b3196; }
+      .h-code { font-size: 16px; font-weight: 700; fill: #1b4299; }
+      .tool { font-size: 15px; font-weight: 700; fill: #1b4299; font-family: ui-monospace, Menlo, Consolas, monospace; }
+      .t { font-size: 13px; fill: #1d2330; }
+      .m { font-size: 12.5px; fill: #5c6577; }
+      .label { font-size: 12.5px; font-weight: 600; fill: #1d2330; }
+      .pill { font-size: 12.5px; font-weight: 600; fill: #3d4555; }
+      .model { fill: #f1edfb; stroke: #6b4fbb; stroke-width: 2; }
+      .code { fill: #eaf0fc; stroke: #2456c7; stroke-width: 2; }
+      .embed { fill: #e4f4f1; stroke: #0f7b6c; stroke-width: 2; }
+      .data { fill: #f2f4f8; stroke: #8a93a6; stroke-width: 1.5; }
+      .reject { fill: #fdecea; stroke: #b3261e; stroke-width: 2; }
+      .out { fill: #e8f5ee; stroke: #1d7a46; stroke-width: 2; }
+      .input { fill: #ffffff; stroke: #8a93a6; stroke-width: 1.5; }
+      .frame { fill: #fbfaff; stroke: #6b4fbb; stroke-width: 2; stroke-dasharray: 8 5; }
+      .flow { stroke: #5c6577; stroke-width: 2; fill: none; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="990" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="40" y="52" class="title">Home-damage claim triage — system architecture</text>
+  <text x="40" y="80" class="tagline">The model judges · code computes · every step is traced</text>
+
+  <!-- Legend -->
+  <rect x="900" y="38" width="16" height="16" rx="3" class="model"/><text x="924" y="51" class="t">GPT-5.5 (remote model)</text>
+  <rect x="1085" y="38" width="16" height="16" rx="3" class="code"/><text x="1109" y="51" class="t">Our code</text>
+  <rect x="1190" y="38" width="16" height="16" rx="3" class="embed"/><text x="1214" y="51" class="t">Local embedding model</text>
+  <rect x="1385" y="38" width="16" height="16" rx="3" class="data"/><text x="1409" y="51" class="t">Data / storage</text>
+
+  <!-- 0 · Inputs -->
+  <text x="40" y="124" class="section">CLAIM INPUTS</text>
+  <rect x="40" y="136" width="260" height="58" rx="8" class="input"/>
+  <text x="56" y="161" class="h">Photos</text><text x="56" y="181" class="m">JPEG / PNG · one or several views</text>
+  <rect x="40" y="206" width="260" height="58" rx="8" class="input"/>
+  <text x="56" y="231" class="h">Description</text><text x="56" y="251" class="m">claimant's free text</text>
+  <rect x="40" y="276" width="260" height="58" rx="8" class="input"/>
+  <text x="56" y="301" class="h">Policy type</text><text x="56" y="321" class="m">5 types · default standard_homeowner</text>
+  <rect x="40" y="346" width="260" height="58" rx="8" class="input"/>
+  <text x="56" y="371" class="h">PDF document (optional)</text><text x="56" y="391" class="m">inspection report or estimate</text>
+
+  <path d="M300,165 H325 M300,235 H325 M300,305 H325 M300,375 H325 M325,165 V375" class="flow"/>
+  <path d="M325,262 H356" class="flow" marker-end="url(#arrow)"/>
+
+  <!-- 1 · Gate -->
+  <rect x="360" y="190" width="220" height="144" rx="10" class="code"/>
+  <text x="376" y="216" class="h-code">① Gate · code</text>
+  <text x="376" y="242" class="t">Validate files</text>
+  <text x="376" y="262" class="t">PDF → text</text>
+  <text x="376" y="282" class="t">Redact card / SSN numbers</text>
+  <text x="376" y="302" class="m">never sent to the model</text>
+  <text x="376" y="320" class="m">invalid input → HTTP 400</text>
+
+  <path d="M580,262 H616" class="flow" marker-end="url(#arrow)"/>
+
+  <!-- 2 · Intake -->
+  <rect x="620" y="190" width="300" height="144" rx="10" class="model"/>
+  <text x="636" y="216" class="h-model">② Intake agent · GPT-5.5</text>
+  <text x="636" y="242" class="t">1 vision call: photo + text together</text>
+  <text x="636" y="262" class="t">Property damage? Usable photo?</text>
+  <text x="636" y="282" class="t">Personal data? Offensive?</text>
+  <text x="636" y="306" class="m">code: text-only → photo check = null;</text>
+  <text x="636" y="323" class="m">PII found by the gate → privacy check false</text>
+
+  <path d="M920,262 H956" class="flow" marker-end="url(#arrow)"/>
+  <rect x="960" y="226" width="230" height="72" rx="36" class="reject"/>
+  <text x="1075" y="257" class="label" text-anchor="middle">Any check fails</text>
+  <text x="1075" y="277" class="m" text-anchor="middle">→ rejected (HTTP 400), stop</text>
+
+  <path d="M770,334 V426" class="flow" marker-end="url(#arrow)"/>
+  <text x="782" y="386" class="m">all checks pass</text>
+
+  <!-- Two models panel -->
+  <rect x="1240" y="110" width="320" height="292" rx="10" fill="#ffffff" stroke="#d9dde5" stroke-width="1.5"/>
+  <text x="1258" y="136" class="section">THE TWO MODELS</text>
+  <rect x="1256" y="148" width="288" height="118" rx="8" class="model"/>
+  <text x="1270" y="171" class="h-model">GPT-5.5 · remote, via Portkey</text>
+  <text x="1270" y="193" class="t">Multimodal LLM: reads images and</text>
+  <text x="1270" y="211" class="t">text in one pass. Judgement + language.</text>
+  <text x="1270" y="231" class="m">Calls tools via JSON schemas</text>
+  <text x="1270" y="251" class="m">~4.4 calls per claim · reasoning off</text>
+  <rect x="1256" y="276" width="288" height="114" rx="8" class="embed"/>
+  <text x="1270" y="299" class="h" fill="#0b5c51">bge-small-en-v1.5 · local CPU</text>
+  <text x="1270" y="321" class="t">Text → 384-number vector; similar</text>
+  <text x="1270" y="339" class="t">meaning → nearby vectors.</text>
+  <text x="1270" y="359" class="m">Embeds the 30 past claims at startup</text>
+  <text x="1270" y="377" class="m">and every search query · $0 per query</text>
+
+  <!-- 3 · Triage agent frame -->
+  <rect x="40" y="430" width="1140" height="512" rx="14" class="frame"/>
+  <text x="60" y="462" class="h-model" style="font-size:19px">③ Triage agent · ReAct loop</text>
+  <text x="60" y="484" class="m">Repeats until submit · max 6 turns · cannot submit before search + estimate · report built from the last estimate call</text>
+
+  <rect x="300" y="502" width="580" height="90" rx="10" class="model"/>
+  <text x="590" y="528" class="h-model" text-anchor="middle">GPT-5.5 · multimodal</text>
+  <text x="590" y="551" class="t" text-anchor="middle">Reads photo + description + PDF text together; judges damage type,</text>
+  <text x="590" y="570" class="t" text-anchor="middle">severity, affected areas, urgency — and chooses the next tool to call</text>
+
+  <path d="M470,592 V651" stroke="#6b4fbb" stroke-width="2.5" fill="none" marker-end="url(#arrow-purple)"/>
+  <text x="456" y="616" class="label" text-anchor="end" fill="#4b3196">ACT · tool call {name, arguments}</text>
+  <text x="456" y="634" class="m" text-anchor="end">REASON · one-line purpose</text>
+  <path d="M710,655 V596" stroke="#2456c7" stroke-width="2.5" fill="none" marker-end="url(#arrow-blue)"/>
+  <text x="724" y="622" class="label" fill="#1b4299">OBSERVE · real result (or error)</text>
+  <text x="724" y="640" class="m">appended to the conversation</text>
+
+  <rect x="300" y="655" width="580" height="58" rx="10" class="code"/>
+  <text x="590" y="679" class="h-code" text-anchor="middle">Tool executor · our code</text>
+  <text x="590" y="700" class="t" text-anchor="middle">validates inputs, runs the tool, records reason → act → observe in the trace</text>
+
+  <path d="M590,713 V728 M235,728 H985" class="flow"/>
+  <path d="M235,728 V748" class="flow" marker-end="url(#arrow)"/>
+  <path d="M610,728 V748" class="flow" marker-end="url(#arrow)"/>
+  <path d="M985,728 V748" class="flow" marker-end="url(#arrow)"/>
+
+  <!-- Tool 1 -->
+  <rect x="60" y="752" width="350" height="172" rx="10" class="code"/>
+  <text x="76" y="778" class="tool">search_past_claims</text>
+  <text x="76" y="802" class="t">Model writes the search query</text>
+  <text x="76" y="822" class="t" fill="#0b5c51">→ bge-small embeds it (384 numbers)</text>
+  <text x="76" y="842" class="t">→ cosine similarity vs 30 past claims</text>
+  <text x="76" y="862" class="m">top 3 · strong ≥ 0.70 · below 0.60 not cited</text>
+  <rect x="76" y="876" width="318" height="34" rx="17" class="data"/>
+  <text x="235" y="898" class="pill" text-anchor="middle">Qdrant · 30 past claims (vectors)</text>
+
+  <!-- Tool 2 -->
+  <rect x="435" y="752" width="350" height="172" rx="10" class="code"/>
+  <text x="451" y="778" class="tool">estimate_repair_cost</text>
+  <text x="451" y="802" class="t">Model picks: damage type, severity, areas</text>
+  <text x="451" y="822" class="t">Code: normalise areas (no double count)</text>
+  <text x="451" y="842" class="t">→ per-area range × distinct areas</text>
+  <text x="451" y="862" class="m">the model never produces a number</text>
+  <rect x="451" y="876" width="318" height="34" rx="17" class="data"/>
+  <text x="610" y="898" class="pill" text-anchor="middle">cost-estimator.json</text>
+
+  <!-- Tool 3 -->
+  <rect x="810" y="752" width="350" height="172" rx="10" class="code"/>
+  <text x="826" y="778" class="tool">check_coverage</text>
+  <text x="826" y="802" class="t">Model picks: incident category</text>
+  <text x="826" y="822" class="t">Code: policy type from the request</text>
+  <text x="826" y="842" class="t">→ listed? deductible · max payout</text>
+  <text x="826" y="862" class="m">indicative only · adjuster confirms</text>
+  <rect x="826" y="876" width="318" height="34" rx="17" class="data"/>
+  <text x="985" y="898" class="pill" text-anchor="middle">coverage-table.json</text>
+
+  <!-- 4 · Assembly -->
+  <path d="M1180,520 H1236" class="flow" marker-end="url(#arrow)"/>
+  <rect x="1240" y="430" width="320" height="196" rx="10" class="code"/>
+  <text x="1256" y="456" class="h-code">④ Report assembly · code</text>
+  <text x="1256" y="480" class="t">Type, severity, areas, cost ← last estimate</text>
+  <text x="1256" y="499" class="t">Citations: only claims actually retrieved</text>
+  <text x="1256" y="522" class="label">Handling (fixed rules):</text>
+  <text x="1256" y="542" class="t">• catastrophic → senior adjuster</text>
+  <text x="1256" y="561" class="t">• confidence high / medium / low</text>
+  <text x="1256" y="580" class="t">• no photo → request photos</text>
+  <text x="1256" y="599" class="t">• conflicting evidence → claimant question</text>
+
+  <path d="M1400,626 V658" class="flow" marker-end="url(#arrow)"/>
+
+  <!-- 5 · Safety -->
+  <rect x="1240" y="662" width="320" height="130" rx="10" class="model"/>
+  <text x="1256" y="688" class="h-model">⑤ Safety agent · rules + GPT-5.5</text>
+  <text x="1256" y="712" class="t">Blocks: coverage promises, payout</text>
+  <text x="1256" y="731" class="t">figures, legal advice, blame, emotion</text>
+  <text x="1256" y="754" class="m">rules on every report → GPT-5.5 rewrite</text>
+  <text x="1256" y="772" class="m">only if a rule trips → template fallback</text>
+
+  <path d="M1400,792 V824" class="flow" marker-end="url(#arrow)"/>
+
+  <!-- 6 · Output -->
+  <rect x="1240" y="828" width="320" height="114" rx="10" class="out"/>
+  <text x="1256" y="854" class="h" fill="#155c35">⑥ Report + trace</text>
+  <text x="1256" y="878" class="t">Stored in SQLite (photos are not stored)</text>
+  <text x="1256" y="898" class="m">GET /claims/{id} · GET /agent/trace/{id}</text>
+  <text x="1256" y="917" class="m">shown in the web UI</text>
+
+  <!-- Footer -->
+  <text x="40" y="972" class="m">Containers: ui (nginx :3000) · api (FastAPI :8000 — agents, tools, bge-small, SQLite) · qdrant (:6333). Only external call: Portkey gateway → GPT-5.5.</text>
+</svg>

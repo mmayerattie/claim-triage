@@ -1,0 +1,18 @@
+{
+  "adjuster_notes": "Inspected on 2023-05-10. Wind damage confirmed on west-facing exterior wall with two siding panels missing and three additional panels loosened. Aluminum fascia on front porch bent approximately 15 degrees outward. Porch railing shows impact damage from debris. NWS reported wind gusts of 52 mph in the area on 2023-05-07. Damage is consistent with wind event. Basic homeowner policy covers storm damage including wind. Repair estimates obtained from two licensed contractors. Full coverage approved.",
+  "affected_areas": [
+    "exterior_siding",
+    "front_porch"
+  ],
+  "case_reference": "REF-E8C494962F052BE2BCDF",
+  "claim_id": "CLM-2023-012",
+  "damage_type": "storm_damage",
+  "date_filed": "2023-05-08",
+  "date_resolved": "2023-06-05",
+  "description": "Strong straight-line winds from a passing storm system tore loose several vinyl siding panels on the west-facing wall of the home and bent the aluminum fascia along the front porch overhang. Two sections of siding were completely detached and found in the yard, exposing the underlying house wrap. The front porch railing also sustained minor bending from wind-driven debris impact.",
+  "fraud_indicators": [],
+  "policy_type": "basic_homeowner",
+  "repair_cost_actual": 2100,
+  "resolution": "covered_full",
+  "severity": "minor"
+}

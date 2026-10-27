@@ -1,0 +1,62 @@
+services:
+  # Vector database for storing embedded historical claims
+  qdrant:
+    image: qdrant/qdrant:v1.12.6
+    ports:
+      - "6333:6333"   # REST API
+      - "6334:6334"   # gRPC
+    volumes:
+      - qdrant_data:/qdrant/storage
+    # The upstream image has no curl; the API retries the readiness endpoint at startup.
+
+  # FastAPI backend: agents, tools, RAG and persistence.
+  api:
+    build: ./api
+    ports:
+      - "8000:8000"
+    env_file: .env   # PORTKEY_API_KEY, PORTKEY_BASE_URL, LLM_MODEL
+    environment:
+      QDRANT_URL: http://qdrant:6333
+      KNOWLEDGE_BASE_DIR: /app/data/knowledge-base
+      TOOLS_DIR: /app/tools
+      DB_PATH: /app/state/claims.db
+      # Model tuning; override from the shell, e.g. LLM_REASONING_EFFORT=none docker compose up -d
+      LLM_REASONING_EFFORT: ${LLM_REASONING_EFFORT-none}
+      LLM_IMAGE_DETAIL: ${LLM_IMAGE_DETAIL:-auto}
+      LLM_STRICT_TOOLS: ${LLM_STRICT_TOOLS:-true}
+    volumes:
+      # Only runtime inputs are mounted; labelled evaluation data never reaches the API.
+      - ./data/knowledge-base:/app/data/knowledge-base:ro
+      - ./tools:/app/tools:ro
+      - claims_state:/app/state
+    depends_on:
+      qdrant:
+        condition: service_started
+    healthcheck:
+      # python:slim has no curl; use the standard library.
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/v1/health', timeout=3)"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+  # Static UI; nginx also proxies /api to the backend so the page is same-origin.
+  ui:
+    image: nginx:1.27-alpine
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./ui/index.html:/usr/share/nginx/html/index.html:ro
+      - ./ui/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:3000/"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  qdrant_data:
+  claims_state:

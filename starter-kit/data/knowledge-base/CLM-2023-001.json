@@ -1,0 +1,18 @@
+{
+  "adjuster_notes": "Inspected property on 2023-01-17. Confirmed burst pipe at the cold water supply line connection under the kitchen sink. Damage is consistent with a slow pressurized leak over several hours. Flooring moisture readings elevated in kitchen and dining room. Recommend full coverage under standard homeowner water damage provision.",
+  "affected_areas": [
+    "kitchen",
+    "dining_room"
+  ],
+  "case_reference": "REF-F1605C1091A4BB6E9C18",
+  "claim_id": "CLM-2023-001",
+  "damage_type": "water_damage",
+  "date_filed": "2023-01-14",
+  "date_resolved": "2023-02-18",
+  "description": "Policyholder reported a burst pipe beneath the kitchen sink that went undetected for approximately 12 hours while the family was away visiting relatives. Water spread across the kitchen floor, saturating the hardwood flooring and seeping into the adjacent dining room. The subfloor sustained moderate water damage requiring partial replacement, and the lower kitchen cabinetry showed signs of warping and water staining.",
+  "fraud_indicators": [],
+  "policy_type": "standard_homeowner",
+  "repair_cost_actual": 5200,
+  "resolution": "covered_full",
+  "severity": "moderate"
+}

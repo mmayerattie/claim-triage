@@ -1,0 +1,18 @@
+{
+  "adjuster_notes": "Inspected on 2023-02-22. National Weather Service confirmed severe hailstorm in the area on 2023-02-17. Roof damage consistent with hail impact pattern across both the main dwelling and detached garage. Approximately 40% of shingles on the south-facing slope require replacement. Both cracked skylights show radial fracture patterns typical of hail strike. Full coverage approved under storm damage provision.",
+  "affected_areas": [
+    "roof",
+    "garage"
+  ],
+  "case_reference": "REF-EE4FADDDBF26DAFC5188",
+  "claim_id": "CLM-2023-004",
+  "damage_type": "storm_damage",
+  "date_filed": "2023-02-19",
+  "date_resolved": "2023-03-26",
+  "description": "A severe hailstorm with reported hailstones up to 1.5 inches in diameter struck the area on the evening of February 17th. The policyholder discovered significant damage to the asphalt shingle roof the following morning, including numerous dents, cracked shingles, and exposed underlayment. The detached garage roof sustained similar damage, and two skylights on the main residence were cracked by hail impact.",
+  "fraud_indicators": [],
+  "policy_type": "standard_homeowner",
+  "repair_cost_actual": 8500,
+  "resolution": "covered_full",
+  "severity": "moderate"
+}

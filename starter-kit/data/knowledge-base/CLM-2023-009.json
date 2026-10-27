@@ -1,0 +1,18 @@
+{
+  "adjuster_notes": "Inspected on 2023-04-13. Graffiti confirmed on south exterior brick wall and front fence. Paint is a standard aerosol spray paint in multiple colors. Brick wall will require professional pressure washing and chemical treatment to remove paint without damaging the masonry. Fence panels can be sanded and repainted. Police report #2023-CPD-08192 obtained. Neighbor's security footage reviewed and corroborates vandalism claim. Full coverage approved under landlord policy vandalism provision.",
+  "affected_areas": [
+    "exterior_walls",
+    "front_fence"
+  ],
+  "case_reference": "REF-87A920B6405551413D46",
+  "claim_id": "CLM-2023-009",
+  "damage_type": "vandalism",
+  "date_filed": "2023-04-11",
+  "date_resolved": "2023-05-02",
+  "description": "The property owner discovered extensive spray-paint graffiti covering approximately 200 square feet of the exterior brick wall on the south side of the rental property. Additional graffiti was found on the wooden front fence panels. The vandalism appeared to have occurred overnight, and neighboring security camera footage confirmed the incident took place around 2:30 AM. A police report was filed the same morning.",
+  "fraud_indicators": [],
+  "policy_type": "landlord",
+  "repair_cost_actual": 750,
+  "resolution": "covered_full",
+  "severity": "minor"
+}

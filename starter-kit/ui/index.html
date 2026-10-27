@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Claim Triage</title>
+  <style>
+    :root {
+      --bg: #f6f7f9; --panel: #ffffff; --text: #1d2330; --muted: #5c6577; --border: #d9dde5;
+      --accent: #2456c7; --ok: #1d7a46; --bad: #b3261e; --warn: #9a6200;
+      --reason: #6b4fbb; --act: #2456c7; --observe: #1d7a46;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 15px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background: var(--bg); color: var(--text); }
+    header { padding: 16px 24px; background: var(--panel); border-bottom: 1px solid var(--border); }
+    header h1 { margin: 0; font-size: 20px; }
+    header p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+    main { display: grid; grid-template-columns: minmax(300px, 380px) 1fr; gap: 20px; padding: 20px 24px; max-width: 1400px; }
+    @media (max-width: 900px) { main { grid-template-columns: 1fr; padding: 16px; } }
+    section { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+    h2 { font-size: 16px; margin: 0 0 12px; }
+    h3 { font-size: 14px; margin: 18px 0 8px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+    label { display: block; font-weight: 600; margin: 12px 0 4px; font-size: 14px; }
+    .hint { font-weight: 400; color: var(--muted); font-size: 12px; }
+    textarea, select, input[type=text] { width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; font: inherit; }
+    textarea { min-height: 110px; resize: vertical; }
+    input[type=file] { width: 100%; font-size: 13px; }
+    button { margin-top: 16px; width: 100%; padding: 10px; border: 0; border-radius: 6px; background: var(--accent); color: #fff; font: inherit; font-weight: 600; cursor: pointer; }
+    button:disabled { opacity: .6; cursor: wait; }
+    button.secondary { background: #e7ebf3; color: var(--text); margin-top: 8px; }
+    .previews { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+    .previews img { width: 72px; height: 54px; object-fit: cover; border-radius: 4px; border: 1px solid var(--border); }
+    #status { margin-top: 12px; font-size: 13px; color: var(--muted); min-height: 1.5em; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+    .kv { border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; }
+    .kv .k { font-size: 12px; color: var(--muted); }
+    .kv .v { font-weight: 600; word-break: break-word; }
+    .flags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .flag { font-size: 12px; padding: 3px 8px; border-radius: 999px; border: 1px solid; }
+    .flag.true { color: var(--ok); border-color: var(--ok); }
+    .flag.false { color: var(--bad); border-color: var(--bad); }
+    .flag.null { color: var(--muted); border-color: var(--border); }
+    .banner { padding: 10px 12px; border-radius: 6px; margin-bottom: 12px; }
+    .banner.bad { background: #fdecea; color: var(--bad); }
+    .banner.warn { background: #fff4e0; color: var(--warn); }
+    .banner ul, .kv ul { margin: 6px 0 0 18px; padding: 0; }
+    .kv ul { font-weight: 400; font-size: 12px; color: var(--muted); }
+    .conf { padding: 1px 8px; border-radius: 999px; color: #fff; text-transform: uppercase; font-size: 12px; }
+    .conf.high { background: var(--ok); } .conf.medium { background: var(--warn); } .conf.low { background: var(--bad); }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; font-size: 12px; }
+    .timeline { list-style: none; margin: 0; padding: 0; }
+    .step { border-left: 3px solid var(--border); padding: 6px 0 10px 12px; margin-left: 4px; }
+    .step.reason { border-color: var(--reason); }
+    .step.act { border-color: var(--act); }
+    .step.observe { border-color: var(--observe); }
+    .step .tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+    .step.reason .tag { color: var(--reason); } .step.act .tag { color: var(--act); } .step.observe .tag { color: var(--observe); }
+    .step .tool { font-family: ui-monospace, Menlo, monospace; font-size: 12px; margin-left: 6px; }
+    details { margin-top: 4px; }
+    summary { cursor: pointer; font-size: 12px; color: var(--muted); }
+    pre { background: #f2f4f8; border-radius: 6px; padding: 8px; font-size: 12px; overflow-x: auto; white-space: pre-wrap; word-break: break-word; margin: 4px 0 0; }
+    .muted { color: var(--muted); font-size: 13px; }
+    .empty { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Claim Triage</h1>
+    <p>Submit damage photos, a description and an optional PDF. Results are a triage aid for adjusters, not a coverage decision.</p>
+  </header>
+
+  <main>
+    <section aria-labelledby="submit-heading">
+      <h2 id="submit-heading">Submit a claim</h2>
+      <form id="claim-form">
+        <label for="images">Damage photos <span class="hint">JPEG or PNG; several views of one incident</span></label>
+        <input id="images" name="images" type="file" accept="image/jpeg,image/png" multiple>
+        <div class="previews" id="previews"></div>
+
+        <label for="description">Incident description</label>
+        <textarea id="description" name="description" placeholder="What happened, where, and when?"></textarea>
+
+        <label for="document">Supporting document <span class="hint">optional PDF (inspection report, estimate)</span></label>
+        <input id="document" name="document" type="file" accept="application/pdf">
+
+        <label for="policy_type">Policy type</label>
+        <select id="policy_type" name="policy_type">
+          <option value="">Not supplied (assume standard homeowner)</option>
+          <option value="basic_homeowner">Basic homeowner</option>
+          <option value="standard_homeowner">Standard homeowner</option>
+          <option value="premium_homeowner">Premium homeowner</option>
+          <option value="renters">Renters</option>
+          <option value="landlord">Landlord</option>
+        </select>
+
+        <button type="submit" id="submit">Submit for triage</button>
+      </form>
+      <div id="status" role="status" aria-live="polite"></div>
+
+      <h3>Open an earlier claim</h3>
+      <input id="lookup-id" type="text" placeholder="CLM-…" aria-label="Claim ID">
+      <button type="button" class="secondary" id="lookup">Load report and trace</button>
+    </section>
+
+    <div>
+      <section id="result" aria-labelledby="result-heading">
+        <h2 id="result-heading">Triage report</h2>
+        <div id="report"><p class="empty">Submit a claim to see the triage assessment.</p></div>
+      </section>
+      <section aria-labelledby="trace-heading" style="margin-top: 20px">
+        <h2 id="trace-heading">Agent trace <span class="hint">reason → act → observe; action purposes, tool inputs and observations</span></h2>
+        <div id="trace"><p class="empty">The ReAct steps appear here after triage.</p></div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const API = '/api/v1';
+    const $ = (id) => document.getElementById(id);
+
+    // Build DOM nodes with textContent only: report text comes from a model and is untrusted.
+    function el(tag, attrs = {}, ...children) {
+      const node = document.createElement(tag);
+      for (const [key, value] of Object.entries(attrs)) {
+        if (key === 'class') node.className = value; else node.setAttribute(key, value);
+      }
+      for (const child of children.flat()) {
+        if (child === null || child === undefined) continue;
+        node.append(child instanceof Node ? child : document.createTextNode(String(child)));
+      }
+      return node;
+    }
+    const label = (s) => String(s ?? '—').replaceAll('_', ' ');
+    const money = (n) => Number(n).toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+    const kv = (k, v) => el('div', { class: 'kv' }, el('div', { class: 'k' }, k), el('div', { class: 'v' }, v));
+    const flags = (obj) => el('div', { class: 'flags' },
+      Object.entries(obj || {}).map(([k, v]) => el('span', { class: 'flag ' + String(v) }, `${label(k)}: ${v === null ? 'n/a' : v}`)));
+
+    $('images').addEventListener('change', () => {
+      const box = $('previews');
+      box.replaceChildren();
+      for (const file of $('images').files) {
+        const img = el('img', { alt: file.name, src: URL.createObjectURL(file) });
+        img.onload = () => URL.revokeObjectURL(img.src);
+        box.append(img);
+      }
+    });
+
+    function renderRejection(payload) {
+      $('report').replaceChildren(
+        el('div', { class: 'banner bad' }, el('strong', {}, 'Submission rejected. '), payload.message || 'Invalid input.'),
+        payload.intake_validation ? el('div', {}, el('h3', {}, 'Intake checks'), flags(payload.intake_validation)) : null);
+      $('trace').replaceChildren(el('p', { class: 'empty' }, 'No triage was run for a rejected submission.'));
+    }
+
+    function renderReport(report) {
+      const a = report.triage_assessment;
+      const cost = a.estimated_repair_cost || {};
+      const h = a.handling || { route: 'standard', confidence: 'high', confidence_factors: [], claimant_requests: [], advisory_notes: [] };
+      const list = (items) => el('ul', {}, items.map((x) => el('li', {}, x)));
+      const nodes = [
+        el('p', { class: 'muted' }, `Claim ${report.claim_id}`),
+        h.route === 'senior_adjuster'
+          ? el('div', { class: 'banner bad' }, el('strong', {}, 'Routed to a senior adjuster. '), h.route_reason) : null,
+        el('div', { class: 'grid' },
+          kv('Route', label(h.route)),
+          el('div', { class: 'kv' }, el('div', { class: 'k' }, 'Confidence'),
+            el('div', { class: 'v' }, el('span', { class: 'conf ' + h.confidence }, h.confidence)),
+            h.confidence_factors.length ? list(h.confidence_factors) : null)),
+        h.claimant_requests.length
+          ? el('div', { class: 'banner warn' }, el('strong', {}, 'Requests for the claimant'), list(h.claimant_requests)) : null,
+        el('div', { class: 'grid' },
+          kv('Damage type', label(a.damage_type)),
+          kv('Severity', label(a.severity)),
+          kv('Urgency', label(a.urgency)),
+          kv('Estimated repair cost', `${money(cost.min)} – ${money(cost.max)}`),
+          kv('Affected areas', (a.affected_areas || []).map(label).join(', ') || '—')),
+        el('h3', {}, 'Damage description'), el('p', {}, a.damage_description),
+        el('h3', {}, 'Recommendation for the adjuster'), el('p', {}, a.recommendation),
+        h.advisory_notes.length ? el('div', {}, el('h3', {}, 'Advisory notes'), list(h.advisory_notes)) : null,
+        el('h3', {}, 'Similar past claims'),
+        (a.similar_past_claims || []).length
+          ? el('table', {}, el('thead', {}, el('tr', {}, el('th', {}, 'Claim'), el('th', {}, 'Similarity'), el('th', {}, 'Summary'))),
+              el('tbody', {}, a.similar_past_claims.map((c) => el('tr', {},
+                el('td', {}, c.claim_id),
+                el('td', {}, `${(c.similarity_score * 100).toFixed(0)}%${c.match_strength ? ' (' + c.match_strength + ')' : ''}`),
+                el('td', {}, c.resolution_summary)))))
+          : el('p', { class: 'empty' }, 'No sufficiently similar historical claims.'),
+        el('h3', {}, 'Intake checks'), flags(report.intake_validation),
+        report.intake_message ? el('p', { class: 'muted' }, report.intake_message) : null,
+        el('h3', {}, 'Output safety checks'), flags(report.safety_checks),
+      ];
+      $('report').replaceChildren(...nodes.filter(Boolean));
+    }
+
+    function renderTrace(trace) {
+      const steps = trace.steps || [];
+      const items = steps.map((s) => {
+        const body = [el('span', { class: 'tag' }, s.type), s.tool_name ? el('span', { class: 'tool' }, s.tool_name) : null,
+                      el('div', {}, s.content)];
+        if (s.tool_input) body.push(el('details', {}, el('summary', {}, 'tool input'), el('pre', {}, JSON.stringify(s.tool_input, null, 2))));
+        if (s.tool_output) body.push(el('details', {}, el('summary', {}, 'observation'), el('pre', {}, JSON.stringify(s.tool_output, null, 2))));
+        return el('li', { class: 'step ' + s.type }, body);
+      });
+      const usage = trace.usage ? ` · ${trace.usage.calls} model calls, ${trace.usage.input_tokens} input / ${trace.usage.output_tokens} output tokens` : '';
+      $('trace').replaceChildren(
+        el('p', { class: 'muted' }, `${steps.length} steps in ${(trace.total_duration_ms / 1000).toFixed(1)} s${usage}`),
+        el('ol', { class: 'timeline' }, items));
+    }
+
+    async function loadClaim(claimId) {
+      const [reportRes, traceRes] = await Promise.all([
+        fetch(`${API}/claims/${encodeURIComponent(claimId)}`), fetch(`${API}/agent/trace/${encodeURIComponent(claimId)}`)]);
+      if (!reportRes.ok) throw new Error(`Claim ${claimId} not found`);
+      renderReport(await reportRes.json());
+      if (traceRes.ok) renderTrace(await traceRes.json());
+    }
+
+    $('claim-form').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const form = new FormData();
+      for (const file of $('images').files) form.append('images', file);
+      const description = $('description').value.trim();
+      if (description) form.append('description', description);
+      if ($('document').files[0]) form.append('document', $('document').files[0]);
+      if ($('policy_type').value) form.append('policy_type', $('policy_type').value);
+      if (!$('images').files.length && !description) {
+        $('status').textContent = 'Add at least one photo or a description.';
+        return;
+      }
+
+      $('submit').disabled = true;
+      const started = Date.now();
+      const timer = setInterval(() => { $('status').textContent = `Triaging… ${Math.round((Date.now() - started) / 1000)} s`; }, 500);
+      try {
+        const response = await fetch(`${API}/claims/triage`, { method: 'POST', body: form });
+        const payload = await response.json().catch(() => ({}));
+        if (response.status === 400) { renderRejection(payload); }
+        else if (!response.ok) { throw new Error(payload.message || `Request failed (HTTP ${response.status})`); }
+        else { renderReport(payload); await loadClaim(payload.claim_id); }
+        $('status').textContent = `Done in ${((Date.now() - started) / 1000).toFixed(1)} s (HTTP ${response.status}).`;
+      } catch (error) {
+        $('status').textContent = error.message;
+      } finally {
+        clearInterval(timer);
+        $('submit').disabled = false;
+      }
+    });
+
+    $('lookup').addEventListener('click', async () => {
+      const id = $('lookup-id').value.trim();
+      if (!id) return;
+      try { await loadClaim(id); $('status').textContent = `Loaded ${id}.`; }
+      catch (error) { $('status').textContent = error.message; }
+    });
+  </script>
+</body>
+</html>

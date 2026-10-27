@@ -1,0 +1,17 @@
+{
+  "adjuster_notes": "Confirmed forced entry damage to garage side door. Police report #2024-BPD-04421 on file. Neighbor's security footage corroborates timeline. Insured provided purchase receipts for major tools. Replacement value of stolen property and door repair within policy limits. Premium policy includes full replacement cost coverage for personal property.",
+  "affected_areas": [
+    "garage"
+  ],
+  "case_reference": "REF-81AE6466A56BA2CB0DB2",
+  "claim_id": "CLM-2024-018",
+  "damage_type": "break_in",
+  "date_filed": "2024-02-10",
+  "date_resolved": "2024-03-18",
+  "description": "The insured returned from a weekend trip to find the side door of the detached garage had been forced open. Power tools including a table saw, miter saw, drill press, and assorted cordless tools were stolen. The door frame was splintered and the lock mechanism destroyed. A police report was filed and security camera footage from a neighbor's property showed an unidentified individual loading items into a pickup truck late Saturday evening.",
+  "fraud_indicators": [],
+  "policy_type": "premium_homeowner",
+  "repair_cost_actual": 4500,
+  "resolution": "covered_full",
+  "severity": "moderate"
+}

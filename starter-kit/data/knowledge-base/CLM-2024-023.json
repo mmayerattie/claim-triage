@@ -1,0 +1,19 @@
+{
+  "adjuster_notes": "Ice dam formation confirmed on-site. Roof inspection shows shingle lifting along north eave consistent with ice dam pressure. Interior water damage limited to one bedroom ceiling and wall section. Approved for ice dam removal, shingle repair, ceiling drywall replacement, and repainting. Basic policy covers ice dam damage as a weather event.",
+  "affected_areas": [
+    "roof",
+    "ceiling",
+    "bedroom"
+  ],
+  "case_reference": "REF-8A44C8B026B9568417A9",
+  "claim_id": "CLM-2024-023",
+  "damage_type": "storm_damage",
+  "date_filed": "2024-02-05",
+  "date_resolved": "2024-03-12",
+  "description": "Prolonged freezing temperatures combined with heavy snowfall caused an ice dam to form along the north-facing eave of the roof. Meltwater backed up under the shingles and leaked into the home, damaging the ceiling and upper wall of a second-floor bedroom. Paint bubbled and peeled across an 8-foot section of ceiling, and drywall showed visible water staining. The homeowner noticed dripping during a brief midday thaw.",
+  "fraud_indicators": [],
+  "policy_type": "basic_homeowner",
+  "repair_cost_actual": 4200,
+  "resolution": "covered_full",
+  "severity": "moderate"
+}

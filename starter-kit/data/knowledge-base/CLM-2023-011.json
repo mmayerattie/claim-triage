@@ -1,0 +1,18 @@
+{
+  "adjuster_notes": "Inspected on 2023-04-27. Rear kitchen window is a standard double-pane unit, shattered inward consistent with external force. Alarm system log confirms activation at 2:14 PM on 2023-04-24. Police report #2023-MPD-07823 filed. Damage limited to the window unit and minor cleanup. No significant property theft beyond reported cash. Replacement window and installation cost within policy limits. Full coverage approved under standard homeowner break-in provision.",
+  "affected_areas": [
+    "rear_entrance",
+    "kitchen"
+  ],
+  "case_reference": "REF-841D7CEB6BCC97CFEEFA",
+  "claim_id": "CLM-2023-011",
+  "damage_type": "break_in",
+  "date_filed": "2023-04-25",
+  "date_resolved": "2023-05-23",
+  "description": "The policyholder discovered a smashed rear window in the kitchen upon returning home from work. Glass fragments were scattered across the kitchen counter and floor. A small amount of cash left on the kitchen counter was taken, but no other rooms appeared to have been entered. The intruder appeared to have been deterred by the home's audible alarm system, which activated upon the window breach.",
+  "fraud_indicators": [],
+  "policy_type": "standard_homeowner",
+  "repair_cost_actual": 800,
+  "resolution": "covered_full",
+  "severity": "minor"
+}

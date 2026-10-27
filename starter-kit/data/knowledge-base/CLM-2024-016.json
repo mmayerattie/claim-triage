@@ -1,0 +1,20 @@
+{
+  "adjuster_notes": "Verified tornado path via NWS storm survey. Damage consistent with EF2 wind speeds. Structural engineer confirmed roof truss failure and load-bearing wall shift in garage. Full replacement of roof, siding, and garage roof section required. Temporary housing authorized for 6 weeks during repairs.",
+  "affected_areas": [
+    "roof",
+    "siding",
+    "attic",
+    "garage"
+  ],
+  "case_reference": "REF-E19863A81B7EA00625E6",
+  "claim_id": "CLM-2024-016",
+  "damage_type": "storm_damage",
+  "date_filed": "2024-03-15",
+  "date_resolved": "2024-05-03",
+  "description": "An EF2 tornado struck the neighborhood on the evening of March 14th, causing catastrophic damage to the property. The roof was partially torn off exposing the attic to rain, and vinyl siding was ripped from the north and west faces of the home. Debris from neighboring structures also impacted the attached garage, collapsing a section of the garage roof. Temporary tarping was applied by emergency crews the following morning to prevent further water intrusion.",
+  "fraud_indicators": [],
+  "policy_type": "standard_homeowner",
+  "repair_cost_actual": 55000,
+  "resolution": "covered_full",
+  "severity": "catastrophic"
+}

@@ -1,0 +1,19 @@
+{
+  "adjuster_notes": "Zone valve failure confirmed by licensed irrigation contractor. Valve showed internal corrosion consistent with age and mineral buildup. Water intrusion into basement was limited to window well area with approximately 2 inches of standing water. Repairs include sprinkler system valve replacement, yard regrading and sod replacement, window well drain repair, basement water extraction and drying, and minor driveway edge repair. Landlord policy covers equipment malfunction water damage. All costs approved.",
+  "affected_areas": [
+    "front_yard",
+    "basement",
+    "driveway"
+  ],
+  "case_reference": "REF-67A830E5A45099EAC34D",
+  "claim_id": "CLM-2024-030",
+  "damage_type": "water_damage",
+  "date_filed": "2024-04-30",
+  "date_resolved": "2024-06-11",
+  "description": "An in-ground sprinkler system zone valve failed in the open position, running continuously for approximately 48 hours while the landlord was out of town and the rental unit was between tenants. The prolonged water flow saturated the front yard, caused soil erosion along the foundation, and water migrated into the basement through a window well. The driveway also sustained minor undermining where water channeled along its edge.",
+  "fraud_indicators": [],
+  "policy_type": "landlord",
+  "repair_cost_actual": 5500,
+  "resolution": "covered_full",
+  "severity": "moderate"
+}

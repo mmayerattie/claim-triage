@@ -1,0 +1,20 @@
+{
+  "adjuster_notes": "Police report #2024-CPD-12094 on file. Forced entry damage to sliding door confirmed, though photos submitted by renter show some inconsistencies in the positioning of displaced items between initial and follow-up documentation. Renters policy covers personal property theft up to policy limit. Claim approved for personal property replacement at $1,200 after deductible. Sliding door repair is landlord responsibility. Flagged for photo inconsistency review but approved based on confirmed forced entry and police report.",
+  "affected_areas": [
+    "living_room",
+    "bedroom"
+  ],
+  "case_reference": "REF-30E9472B55515BD1392B",
+  "claim_id": "CLM-2024-024",
+  "damage_type": "break_in",
+  "date_filed": "2024-03-28",
+  "date_resolved": "2024-05-08",
+  "description": "The renter reported a forced entry through the ground-floor sliding glass door while they were away at work. The sliding door's lock was pried and the door forced off its track. A laptop, gaming console, jewelry, and a small safe containing personal documents were reported stolen from the living room and bedroom. The renter filed a police report the same evening upon returning home and discovering the break-in.",
+  "fraud_indicators": [
+    "inconsistent_damage_photos"
+  ],
+  "policy_type": "renters",
+  "repair_cost_actual": 1200,
+  "resolution": "covered_full",
+  "severity": "severe"
+}

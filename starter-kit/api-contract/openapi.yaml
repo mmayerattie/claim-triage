@@ -1,0 +1,329 @@
+openapi: 3.1.0
+info:
+  title: Claim Triage API
+  description: AI-powered property damage claim triage system
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8000
+    description: Local development
+
+paths:
+  /api/v1/health:
+    get:
+      summary: Health check
+      operationId: healthCheck
+      responses:
+        "200":
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [healthy]
+                  services:
+                    type: object
+                    properties:
+                      vector_db:
+                        type: string
+                        enum: [connected, disconnected]
+                      llm:
+                        type: string
+                        enum: [configured, not_configured]
+
+  /api/v1/claims/triage:
+    post:
+      summary: Submit a claim for triage
+      operationId: triageClaim
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              anyOf:
+                - required: [image]
+                - required: [images]
+                - required: [description]
+              properties:
+                image:
+                  type: string
+                  format: binary
+                  description: Damage photo (JPEG, PNG)
+                images:
+                  type: array
+                  minItems: 1
+                  items:
+                    type: string
+                    format: binary
+                  description: Additional JPEG/PNG views of the same incident; repeated multipart images fields.
+                description:
+                  type: string
+                  minLength: 1
+                  description: Text description of the incident
+                document:
+                  type: string
+                  format: binary
+                  description: Optional supporting document (PDF)
+                policy_type:
+                  type: string
+                  enum:
+                    - basic_homeowner
+                    - standard_homeowner
+                    - premium_homeowner
+                    - renters
+                    - landlord
+                  description: Claimant's policy type (defaults to standard_homeowner)
+      responses:
+        "200":
+          description: Triage completed successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TriageResponse"
+        "400":
+          description: Invalid input (failed intake validation)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "422":
+          description: Safety check failed on output
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SafetyError"
+
+  /api/v1/claims/{claim_id}:
+    get:
+      summary: Retrieve a completed triage report
+      operationId: getTriageReport
+      parameters:
+        - name: claim_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Triage report
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TriageResponse"
+        "404":
+          description: Claim not found
+
+  /api/v1/agent/trace/{claim_id}:
+    get:
+      summary: Get the ReAct execution trace for a triage run
+      operationId: getAgentTrace
+      parameters:
+        - name: claim_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Agent execution trace
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgentTrace"
+        "404":
+          description: Trace not found
+
+components:
+  schemas:
+    TriageResponse:
+      type: object
+      required:
+        - claim_id
+        - intake_validation
+        - triage_assessment
+        - safety_checks
+      properties:
+        claim_id:
+          type: string
+          description: Unique identifier for this triage run
+        intake_validation:
+          $ref: "#/components/schemas/IntakeValidation"
+        triage_assessment:
+          $ref: "#/components/schemas/TriageAssessment"
+        safety_checks:
+          $ref: "#/components/schemas/SafetyChecks"
+
+    IntakeValidation:
+      type: object
+      required:
+        - is_property_damage
+        - is_valid_image
+        - no_pii_detected
+        - no_offensive_content
+      properties:
+        is_property_damage:
+          type: boolean
+        is_valid_image:
+          type: [boolean, "null"]
+          description: null only for text-only input; no visual validation was performed.
+        no_pii_detected:
+          type: boolean
+        no_offensive_content:
+          type: boolean
+
+    TriageAssessment:
+      type: object
+      required:
+        - damage_type
+        - severity
+        - affected_areas
+        - damage_description
+        - estimated_repair_cost
+        - urgency
+        - recommendation
+        - similar_past_claims
+      properties:
+        damage_type:
+          type: string
+          enum:
+            - water_damage
+            - fire_damage
+            - storm_damage
+            - break_in
+            - vandalism
+            - other
+        severity:
+          type: string
+          enum:
+            - minor
+            - moderate
+            - severe
+            - catastrophic
+        affected_areas:
+          type: array
+          items:
+            type: string
+        damage_description:
+          type: string
+        estimated_repair_cost:
+          type: object
+          properties:
+            min:
+              type: number
+            max:
+              type: number
+            currency:
+              type: string
+              default: USD
+        urgency:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - critical
+        recommendation:
+          type: string
+        similar_past_claims:
+          type: array
+          items:
+            type: object
+            properties:
+              claim_id:
+                type: string
+              similarity_score:
+                type: number
+                minimum: 0
+                maximum: 1
+              resolution_summary:
+                type: string
+
+    SafetyChecks:
+      type: object
+      required:
+        - no_coverage_promises
+        - no_legal_advice
+        - no_settlement_amounts
+        - no_liability_determination
+        - no_emotional_language
+      properties:
+        no_coverage_promises:
+          type: boolean
+        no_legal_advice:
+          type: boolean
+        no_settlement_amounts:
+          type: boolean
+        no_liability_determination:
+          type: boolean
+        no_emotional_language:
+          type: boolean
+
+    AgentTrace:
+      type: object
+      required:
+        - claim_id
+        - steps
+        - total_duration_ms
+      properties:
+        claim_id:
+          type: string
+        steps:
+          type: array
+          items:
+            type: object
+            required:
+              - step_number
+              - type
+              - content
+              - timestamp
+            properties:
+              step_number:
+                type: integer
+              type:
+                type: string
+                enum:
+                  - reason
+                  - act
+                  - observe
+              content:
+                type: string
+                description: Concise action-purpose summary, tool call, or actual observation; not private model reasoning
+              tool_name:
+                type: string
+                description: Only present for 'act' steps
+              tool_input:
+                type: object
+                description: Only present for 'act' steps
+              tool_output:
+                type: [object, array]
+                items: {}
+                description: Only present for 'observe' steps
+              timestamp:
+                type: string
+                format: date-time
+        total_duration_ms:
+          type: integer
+
+    ValidationError:
+      type: object
+      properties:
+        error:
+          type: string
+        intake_validation:
+          $ref: "#/components/schemas/IntakeValidation"
+        message:
+          type: string
+
+    SafetyError:
+      type: object
+      properties:
+        error:
+          type: string
+        safety_checks:
+          $ref: "#/components/schemas/SafetyChecks"
+        message:
+          type: string
